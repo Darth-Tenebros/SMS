@@ -120,3 +120,6 @@ document.getElementById('search').addEventListener('keyup', function() {
         tr[i].style.display = showRow ? "" : "none";
     }
 });
+
+// TODO: FIGURE OUT A WAY TO FORMAT OBJECTS FOR SESSION STORAGE
+// TODO: BUILD A SMOL GRAPHING UTILITY/LIB
