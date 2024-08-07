@@ -26,6 +26,10 @@ html, body{
     display: flex;
     flex-direction: column;
 }
+
+a{
+    text-decoration: none;
+}
 /* NAV STYLES END */
 
 
@@ -65,7 +69,7 @@ thead th:nth-child(3){
     width: 10%;
 }
 
-thead th:nth-child(){
+thead th:nth-child(4){
     width: 10%;
 }
 
