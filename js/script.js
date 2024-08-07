@@ -1,6 +1,7 @@
 
-import { Student, createRow } from "./Student.js";
+import { Student, createRow } from "./helper_functions/student.js";
 
+const form = document.getElementById('form');
 const fname = document.getElementById('fname-input');
 const lname = document.getElementById('lname-input');
 const mark = document.getElementById('mark-input');
@@ -17,6 +18,13 @@ const students = [
     new Student("Gumball", "Waterson", 50),
     new Student("Morty", "Smith", 67),
     new Student("Tim", "Cook", 2),
+    new Student("John", "Doe", 47),
+    new Student("Jane", "Doe", 89),
+    new Student("Patrick", "Star", 23),
+    new Student("Spongebob", "Squarepants", 23),
+    new Student("Gumball", "Waterson", 50),
+    new Student("Morty", "Smith", 67),
+    new Student("Tim", "Cook", 2),
 
 ];
 
@@ -24,14 +32,9 @@ const students = [
 function onLoad(){
 
     for (const student of students) {
-        
-
         const row = createRow(student);
-
         tableBody.appendChild(row);
     }
-
-
 }
 document.addEventListener('DOMContentLoaded', onLoad);
 
@@ -41,10 +44,8 @@ function submit(){
     students.push(student);
     const row = createRow(student);
 
-    tableBody.appendChild(row);
+    tableBody.prepend(row)
 
-    fname.value = '';
-    lname.value = '';
-    mark.value = '';
+    form.reset();
 }
 submitButton.addEventListener('click', submit);
