@@ -1,15 +1,80 @@
 html, body{
     margin: 0;
-    height: 100%;
+    padding: 1%;
+    height: 100vh;
+    overflow: hidden;
 }
 
 .main-container{
     display: flex;
     flex-direction: row;
-    gap: 10%;
+    gap: 5%;
+    height: 100%;
+    width: 100%;
 }
 
+/* NAV STYLES START*/
 .aside{
     border-right: 1px solid black;
     height: 100%;
+    width: 15%;
+    padding: 1%;
 }
+
+.nav-bar{
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+}
+/* NAV STYLES END */
+
+
+
+/* MAIN STYLES START */
+
+.table-container{
+    border: 2px solid blue;
+    height: 100%;
+    width: 85%;
+    padding: 1%;
+}
+
+/* table styles */
+.students-table{
+    padding: 1%;
+    table-layout: fixed;
+    width: 100%;
+    border-collapse: collapse;
+    border: 2px solid black ;
+}
+
+/* 
+add a width to each column
+because the table layout is fixed, the columns will
+take the sizes of theie headers
+*/
+thead th:nth-child(1){
+    width: 40%;
+}
+
+thead th:nth-child(2){
+    width: 40%;
+}
+
+thead th:nth-child(3){
+    width: 10%;
+}
+
+thead th:nth-child(){
+    width: 10%;
+}
+
+th, td{
+    padding: 20px;
+    border: 1px solid red;
+}
+
+td{
+    text-align: center;
+}
+
