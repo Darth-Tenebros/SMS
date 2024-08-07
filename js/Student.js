@@ -89,19 +89,25 @@ export function createRow(student){
     tdMark.classList.add('data');
 
     // select and options
-    const tdSelect = document.createElement('td')
-    const select = document.createElement('select');
+    const tdDiv = document.createElement('div')
+    tdDiv.classList.add('student-actions');
 
-    const option = document.createElement('option');
-    option.value = 'delete'
-    option.textContent = 'delete'
-    select.appendChild(option)
+    const deleteButton = document.createElement('button');
+    deleteButton.type = 'button';
+    deleteButton.textContent = 'delete';
+    deleteButton.classList.add('table-action');
 
-    const option2 = document.createElement('option')
-    option2.value = 'update'
-    option2.textContent = 'update'
-    select.appendChild(option2)
-    tdSelect.append(select);
+    const updateButton = document.createElement('button');
+    updateButton.type = 'button';
+    updateButton.textContent = 'update';
+    updateButton.classList.add('table-action');
+
+    
+
+
+    tdDiv.appendChild(deleteButton);
+    tdDiv.appendChild(updateButton);
+
     //
 
     tdId.textContent = student.id.slice(0, 4);
@@ -115,7 +121,7 @@ export function createRow(student){
     row.appendChild(tdFirstName);
     row.appendChild(tdLastName);
     row.appendChild(tdMark);
-    row.appendChild(tdSelect);
+    row.appendChild(tdDiv);
 
     return row;
 }
