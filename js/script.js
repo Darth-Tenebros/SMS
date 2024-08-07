@@ -90,3 +90,33 @@ tableBody.addEventListener('click', function(event){
         }
     }
 });
+
+document.getElementById('search').addEventListener('keyup', function() {
+    const input = document.getElementById('search');
+    const filter = input.value.toUpperCase();
+    const table = document.querySelector('.students-table');
+    const tr = table.getElementsByTagName('tr');
+
+    // Loop through all table rows, and hide those who don't match the search query
+    for (let i = 1; i < tr.length; i++) { // Start from 1 to skip the header row
+        const tdFirstName = tr[i].getElementsByTagName('td')[1];
+        const tdLastName = tr[i].getElementsByTagName('td')[2];
+        let showRow = false;
+
+        if (tdFirstName) {
+            const firstNameValue = tdFirstName.textContent || tdFirstName.innerText;
+            if (firstNameValue.toUpperCase().indexOf(filter) > -1) {
+                showRow = true;
+            }
+        }
+
+        if (tdLastName) {
+            const lastNameValue = tdLastName.textContent || tdLastName.innerText;
+            if (lastNameValue.toUpperCase().indexOf(filter) > -1) {
+                showRow = true;
+            }
+        }
+
+        tr[i].style.display = showRow ? "" : "none";
+    }
+});
