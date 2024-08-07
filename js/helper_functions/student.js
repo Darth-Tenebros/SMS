@@ -13,7 +13,7 @@ export class Student{
      * @param {number} mark: current mark of this student
      */
     constructor(firstname, lastname, mark){
-        this.#Id =  Math.floor(Math.random() * Date.now()).toString();
+        this.#Id =  Math.floor(Math.random() * Date.now()).toString().slice(0, 4);
         this.#firstname = firstname;
         this.#lastname = lastname;
         this.#mark = mark;
@@ -88,6 +88,11 @@ export function createRow(student){
     const tdMark = document.createElement('td');
     tdMark.classList.add('data');
 
+    tdId.textContent = student.id.slice(0, 4);
+    tdFirstName.textContent = student.firstname;
+    tdLastName.textContent = student.lastname;
+    tdMark.textContent = student.mark;
+
     // select and options
     const tdDiv = document.createElement('div')
     tdDiv.classList.add('student-actions');
@@ -96,26 +101,17 @@ export function createRow(student){
     deleteButton.type = 'button';
     deleteButton.textContent = 'delete';
     deleteButton.classList.add('delete-button');
+    deleteButton.value = student.id;
 
     const updateButton = document.createElement('button');
     updateButton.type = 'button';
     updateButton.textContent = 'update';
     updateButton.classList.add('update-button');
-
-    
-
+    updateButton.value = student.id;
 
     tdDiv.appendChild(deleteButton);
     tdDiv.appendChild(updateButton);
-
     //
-
-    tdId.textContent = student.id.slice(0, 4);
-    tdFirstName.textContent = student.firstname;
-    tdLastName.textContent = student.lastname;
-    tdMark.textContent = student.mark;
-
-    console.log(tdFirstName.textContent);
 
     row.appendChild(tdId);
     row.appendChild(tdFirstName);
@@ -124,4 +120,25 @@ export function createRow(student){
     row.appendChild(tdDiv);
 
     return row;
+}
+
+
+/**
+ * finds a student in an array and returns the index
+ *
+ * @param {number} id
+ * @param {array} arr
+ * @returns {number}
+ */
+export function findStudentIndex(id, arr){
+    let index = -1;
+
+    for(let i = 0; i < arr.length; i++){
+        if(arr[i].id === id){
+            index = i;
+            break;
+        }
+    }
+
+    return index;
 }
