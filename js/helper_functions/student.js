@@ -95,12 +95,12 @@ export function createRow(student){
     const deleteButton = document.createElement('button');
     deleteButton.type = 'button';
     deleteButton.textContent = 'delete';
-    deleteButton.classList.add('table-action');
+    deleteButton.classList.add('delete-button');
 
     const updateButton = document.createElement('button');
     updateButton.type = 'button';
     updateButton.textContent = 'update';
-    updateButton.classList.add('table-action');
+    updateButton.classList.add('update-button');
 
     
 
