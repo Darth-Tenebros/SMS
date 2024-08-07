@@ -5,15 +5,11 @@ html, body{
     /* overflow: hidden; */
 }
 
-body{
-    display: ;
-}
-
 .main-container{
     display: flex;
     flex-direction: row;
     gap: 5%;
-    height: 100%;
+    height: 90%;
     width: 100%;
 }
 
@@ -21,7 +17,7 @@ body{
 .aside{
     border-right: 1px solid black;
     height: 100%;
-    width: 15%;
+    width: 10%;
     padding: 1%;
 }
 
@@ -43,8 +39,9 @@ a{
 .table-container{
     border: 2px solid blue;
     height: 100%;
-    width: 85%;
+    width: 80%;
     padding: 1%;
+    overflow-y: scroll;
 }
 
 /* table styles */
@@ -90,3 +87,20 @@ td{
     text-align: center;
 }
 
+
+.add-form{
+    /* width: 8%; */
+}
+
+.student-actions{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    width: 100%;
+}
+
+.table-action{
+    margin-top: 5px;
+    width: 100%;
+}
