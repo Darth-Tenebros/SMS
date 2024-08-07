@@ -42,5 +42,9 @@ function submit(){
     const row = createRow(student);
 
     tableBody.appendChild(row);
+
+    fname.value = '';
+    lname.value = '';
+    mark.value = '';
 }
 submitButton.addEventListener('click', submit);
