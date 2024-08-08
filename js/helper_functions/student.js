@@ -86,16 +86,26 @@ export class Student{
     static formatReadStudent(studentString){
         const attributes = studentString.split('-');
         const student = new Student(attributes[1], attributes[2], attributes[3]);
-        student.#Id = attributes[0];
-        console.log(student.id);
+        student.#Id = attributes[0];    
         return student;
     }
 
     static pouplateTable(element){
         for(let [_, value] of Object.entries(localStorage)){
-            element.appendChild(createRow(Student.formatReadStudent(value)));
+            const row = createRow(Student.formatReadStudent(value))
+            element.appendChild(row);
         }
-    } 
+    }
+
+    static updateStudent(id, fname, lname, mark){
+        const student = new Student(fname, lname, mark);
+        student.#Id = id;
+        Student.write(student);
+    }
+
+    static deleteStudent(id){
+        localStorage.removeItem(id);
+    }
 }
 
 

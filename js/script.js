@@ -40,19 +40,10 @@ function submit(){
         Student.write(student);
     }else{
         const id = submitButton.value;
-        
-        const index = findStudentIndex(id, students);
-        if(index > -1){
-            students[index].firstname = fname.value;
-            students[index].lastname = lname.value;
-            students[index].mark = mark.value;
-        }
+        Student.updateStudent(id, fname.value, lname.value, mark.value);
 
         tableBody.innerHTML = '';
-        for (const student of students) {
-            const row = createRow(student);
-            tableBody.appendChild(row);
-        }
+        Student.pouplateTable(tableBody);
 
     }
     submitButton.value = '';    
@@ -64,29 +55,18 @@ submitButton.addEventListener('click', submit);
 tableBody.addEventListener('click', function(event){
     if([...event.target.classList].includes('delete-button')){
         const id = event.target.value;
-
-        const index = findStudentIndex(id, students);
-        if(index > -1){
-            students.splice(index, 1);
-        }
-
+        Student.deleteStudent(id);
         tableBody.innerHTML = '';
-        for (const student of students) {
-            const row = createRow(student);
-            tableBody.appendChild(row);
-        }
+        Student.pouplateTable(tableBody);
     }
     else if([...event.target.classList].includes('update-button')){
         const id = event.target.value;
 
-        const index = findStudentIndex(id, students);
-        if(index > -1){
-            const student = students[index];
-            fname.value = student.firstname;
-            lname.value = student.lastname;
-            mark.value = student.mark;
-            submitButton.value = student.id;
-        }
+        const student = Student.formatReadStudent(localStorage.getItem(id));    
+        fname.value = student.firstname;
+        lname.value = student.lastname;
+        mark.value = student.mark;
+        submitButton.value = student.id;
     }
 });
 
