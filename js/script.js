@@ -11,23 +11,21 @@ const submitButton = document.getElementById('submit-student');
 const tableBody = document.getElementsByClassName("students-table")[0].getElementsByClassName("table-body")[0];
 
 const students = [
-    new Student("John", "Doe", 47),
-    new Student("Jane", "Doe", 89),
-    new Student("Patrick", "Star", 23),
-    new Student("Spongebob", "Squarepants", 23),
-    new Student("Gumball", "Waterson", 50),
-    new Student("Morty", "Smith", 67),
-    new Student("Tim", "Cook", 2),
+    // new Student("John", "Doe", 47),
+    // new Student("Jane", "Doe", 89),
+    // new Student("Patrick", "Star", 23),
+    // new Student("Spongebob", "Squarepants", 23),
+    // new Student("Gumball", "Waterson", 50),
+    // new Student("Morty", "Smith", 67),
+    // new Student("Tim", "Cook", 2),
 
 ];
 
 
-function onLoad(){
 
-    for (const student of students) {
-        const row = createRow(student);
-        tableBody.appendChild(row);
-    }
+
+function onLoad(){
+    Student.pouplateTable(tableBody);
 }
 document.addEventListener('DOMContentLoaded', onLoad);
 
@@ -39,6 +37,7 @@ function submit(){
         const row = createRow(student);
 
         tableBody.prepend(row)
+        Student.write(student);
     }else{
         const id = submitButton.value;
         
@@ -56,7 +55,7 @@ function submit(){
         }
 
     }
-
+    submitButton.value = '';    
     form.reset();
 }
 submitButton.addEventListener('click', submit);
