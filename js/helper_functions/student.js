@@ -53,6 +53,14 @@ export class Student{
         this.#lastname = newName;
     }
 
+
+    /**
+     * @param {string} id
+     */
+    set #id(id){
+        this.#Id = id;
+    }
+
     /**
      * updates the mark of this student
      *
@@ -60,6 +68,27 @@ export class Student{
      */
     set mark(newMark){
         this.#mark = newMark;
+    }
+
+
+    /**
+     * returns a string representation of this object
+     * @override
+     * @returns {string}
+     */
+    toString(){
+        return `${this.id}-${this.firstname}-${this.lastname}-${this.mark}`;
+    }
+
+
+    /**
+     * writes this object to local storage.
+     *
+     * @static
+     * @param {Student} obj
+     */
+    static write(obj){
+        localStorage.setItem(obj.id, obj.toString());
     }
 
     
@@ -88,7 +117,7 @@ export function createRow(student){
     const tdMark = document.createElement('td');
     tdMark.classList.add('data');
 
-    tdId.textContent = student.id.slice(0, 4);
+    tdId.textContent = student.id;
     tdFirstName.textContent = student.firstname;
     tdLastName.textContent = student.lastname;
     tdMark.textContent = student.mark;
