@@ -170,7 +170,7 @@ export function createRow(student){
  * finds a student in an array and returns the index
  *
  * @param {number} id
- * @param {array} arr
+ * @param {Student[]} arr
  * @returns {number}
  */
 export function findStudentIndex(id, arr){
