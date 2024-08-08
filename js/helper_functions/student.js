@@ -53,14 +53,6 @@ export class Student{
         this.#lastname = newName;
     }
 
-
-    /**
-     * @param {string} id
-     */
-    set #id(id){
-        this.#Id = id;
-    }
-
     /**
      * updates the mark of this student
      *
@@ -91,7 +83,19 @@ export class Student{
         localStorage.setItem(obj.id, obj.toString());
     }
 
-    
+    static formatReadStudent(studentString){
+        const attributes = studentString.split('-');
+        const student = new Student(attributes[1], attributes[2], attributes[3]);
+        student.#Id = attributes[0];
+        console.log(student.id);
+        return student;
+    }
+
+    static pouplateTable(element){
+        for(let [_, value] of Object.entries(localStorage)){
+            element.appendChild(createRow(Student.formatReadStudent(value)));
+        }
+    } 
 }
 
 
