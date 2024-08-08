@@ -150,3 +150,32 @@ html, body {
 .delete-button:hover {
     background-color: #c82333;
 }
+
+.modal{
+    border: 1px solid red;
+    width: 40%;
+    height: 60%;
+    background-color: aqua;
+    position: fixed;
+    left: 50%;
+    transform: translate(-50%);
+    display: none;
+    z-index: 5;
+}
+.inner{
+    margin: auto;
+    height: 95%;
+    background-color: #0056b3;
+}
+
+#close{
+    cursor: pointer;
+    text-decoration: none;
+    color: black;
+    font-weight: bolder;
+    height: 3%;
+}
+
+#graph{
+    background-color: #333;
+}

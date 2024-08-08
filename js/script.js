@@ -6,6 +6,10 @@ const fname = document.getElementById('fname-input');
 const lname = document.getElementById('lname-input');
 const mark = document.getElementById('mark-input');
 
+const statsModal = document.getElementById('Stats');
+const close = document.getElementById('close');
+const modal = document.getElementById('modal');
+
 const submitButton = document.getElementById('submit-student');
 const searchField = document.getElementById('search');
 
@@ -22,7 +26,6 @@ document.addEventListener('DOMContentLoaded', onLoad);
 function submit(){
     if(submitButton.value === ""){
         const student = new Student(fname.value, lname.value, mark.value);
-        students.push(student);
         const row = createRow(student);
 
         tableBody.prepend(row)
@@ -43,7 +46,7 @@ submitButton.addEventListener('click', submit);
 // EVENT DELEGATTION BECAUSE DYNAMICALLY ADDED ELEMENTS LOAD WEIRD - 84 HOURS WASTED
 // TODO (EXTRA): event has been deprecated, FIGURE OUT HOW TO USE Event.
 tableBody.addEventListener('click', function(event){
-    const id = '';
+    let id = '';
     if([...event.target.classList].includes('delete-button')){
         id = event.target.value;
         Student.deleteStudent(id);
@@ -92,5 +95,16 @@ function search() {
     }
 }
 searchField.addEventListener('keyup', search);
+
+
+
+statsModal.addEventListener('click', function(){
+    modal.style.display = 'block';
+});
+
+close.addEventListener('click', function(){
+    modal.style.display = 'none'; 
+});
+
 
 // TODO: BUILD A SMOL GRAPHING UTILITY/LIB
