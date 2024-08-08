@@ -97,6 +97,16 @@ export class Student{
         }
     }
 
+    static getAllStudents(){
+        let students = [];
+
+        for(let [_, value] of Object.entries(localStorage)){
+            students.push(Student.formatReadStudent(value));
+        }
+
+        return students
+    }
+
     static updateStudent(id, fname, lname, mark){
         const student = new Student(fname, lname, mark);
         student.#Id = id;

@@ -1,4 +1,5 @@
 
+import { BarGraph, BarItem } from "./helper_functions/plot-monkey.js";
 import { Student, createRow, findStudentIndex } from "./helper_functions/student.js";
 
 const form = document.getElementById('form');
@@ -6,6 +7,7 @@ const fname = document.getElementById('fname-input');
 const lname = document.getElementById('lname-input');
 const mark = document.getElementById('mark-input');
 
+const svg = document.getElementById('graph');
 const statsModal = document.getElementById('Stats');
 const close = document.getElementById('close');
 const modal = document.getElementById('modal');
@@ -100,6 +102,18 @@ searchField.addEventListener('keyup', search);
 
 statsModal.addEventListener('click', function(){
     modal.style.display = 'block';
+
+    const students = Student.getAllStudents();
+
+    let barItems = []
+    for (const student of students) {
+        barItems.push(new BarItem(student.lastname, Number(student.mark)));
+    }
+
+    const barGraph = new BarGraph(barItems);
+    barGraph.render(svg);
+
+
 });
 
 close.addEventListener('click', function(){

@@ -178,4 +178,5 @@ html, body {
 
 #graph{
     background-color: #333;
+    overflow-x: auto;
 }
