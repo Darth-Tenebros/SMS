@@ -7,20 +7,9 @@ const lname = document.getElementById('lname-input');
 const mark = document.getElementById('mark-input');
 
 const submitButton = document.getElementById('submit-student');
+const searchField = document.getElementById('search');
 
 const tableBody = document.getElementsByClassName("students-table")[0].getElementsByClassName("table-body")[0];
-
-const students = [
-    // new Student("John", "Doe", 47),
-    // new Student("Jane", "Doe", 89),
-    // new Student("Patrick", "Star", 23),
-    // new Student("Spongebob", "Squarepants", 23),
-    // new Student("Gumball", "Waterson", 50),
-    // new Student("Morty", "Smith", 67),
-    // new Student("Tim", "Cook", 2),
-
-];
-
 
 
 
@@ -52,15 +41,17 @@ function submit(){
 submitButton.addEventListener('click', submit);
 
 // EVENT DELEGATTION BECAUSE DYNAMICALLY ADDED ELEMENTS LOAD WEIRD - 84 HOURS WASTED
+// TODO (EXTRA): event has been deprecated, FIGURE OUT HOW TO USE Event.
 tableBody.addEventListener('click', function(event){
+    const id = '';
     if([...event.target.classList].includes('delete-button')){
-        const id = event.target.value;
+        id = event.target.value;
         Student.deleteStudent(id);
         tableBody.innerHTML = '';
         Student.pouplateTable(tableBody);
     }
     else if([...event.target.classList].includes('update-button')){
-        const id = event.target.value;
+        id = event.target.value;
 
         const student = Student.formatReadStudent(localStorage.getItem(id));    
         fname.value = student.firstname;
@@ -70,7 +61,8 @@ tableBody.addEventListener('click', function(event){
     }
 });
 
-document.getElementById('search').addEventListener('keyup', function() {
+
+function search() {
     const input = document.getElementById('search');
     const filter = input.value.toUpperCase();
     const table = document.querySelector('.students-table');
@@ -98,7 +90,7 @@ document.getElementById('search').addEventListener('keyup', function() {
 
         tr[i].style.display = showRow ? "" : "none";
     }
-});
+}
+searchField.addEventListener('keyup', search);
 
-// TODO: FIGURE OUT A WAY TO FORMAT OBJECTS FOR SESSION STORAGE
 // TODO: BUILD A SMOL GRAPHING UTILITY/LIB
