@@ -41,13 +41,13 @@ export class BarGraph{
      * @param {SVGElement} element
      */
     render(element){
-        const start = 3;
+        let start = 3;
         const spacebetween = 37;
 
         for(let i = 0; i < this.barItems.length; i++){
             const rect = document.createElementNS('http://www.w3.org/2000/svg', 'rect');
             rect.setAttribute('y', '50');
-            const height = svg.offsetHeight * (this.barItems[i].value / 100);
+            const height = 100 * (this.barItems[i].value / 100);
             rect.setAttribute('height', `${height}px`);
             rect.setAttribute('width', '30px');
             rect.setAttribute('x', `${start}px`);
