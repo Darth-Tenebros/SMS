@@ -38,7 +38,7 @@ export class BarGraph{
     /**
      * render this bar grapgh
      *
-     * @param {SVGElement} element
+     * @param {SVGElement} element: the svg element this graph will be displayed on
      */
     render(element){
         let start = 3;
