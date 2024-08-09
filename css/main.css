@@ -160,7 +160,8 @@ html, body {
     left: 50%;
     transform: translate(-50%);
     display: none;
-    z-index: 5;
+    z-index: 1;
+    overflow: auto;
 }
 .inner{
     margin: auto;
