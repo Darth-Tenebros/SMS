@@ -18,7 +18,7 @@ const searchField = document.getElementById('search');
 const tableBody = document.getElementsByClassName("students-table")[0].getElementsByClassName("table-body")[0];
 
 
-
+//TODO: CLEANUP FUNCTIONS
 function onLoad(){
     Student.pouplateTable(tableBody);
 
@@ -27,8 +27,8 @@ function onLoad(){
     const tbody = table.querySelector('.table-body');
     let isAscending = true;
 
-    headers.forEach((header, index) => {
-        header.addEventListener('click', () => {
+    headers.forEach(function(header){
+        header.addEventListener('click', function(){
             const column = header.textContent.trim();
             const columnIndex = Array.from(headers).indexOf(header);
 
