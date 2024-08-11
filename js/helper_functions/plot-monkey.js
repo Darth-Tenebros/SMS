@@ -47,11 +47,32 @@ export class BarGraph{
         for(let i = 0; i < this.barItems.length; i++){
             const rect = document.createElementNS('http://www.w3.org/2000/svg', 'rect');
             rect.setAttribute('y', '50');
+
+            const text = document.createElementNS('http://www.w3.org/2000/svg', 'title');
+
             const height = 100 * (this.barItems[i].value / 100);
             rect.setAttribute('height', `${height}px`);
             rect.setAttribute('width', '30px');
             rect.setAttribute('x', `${start}px`);
             rect.setAttribute('fill', 'red');
+            rect.appendChild(text);
+
+            // Add mouseover event to show tooltip
+            rect.addEventListener('mouseover', (e) => {
+                const tooltip = document.createElementNS('http://www.w3.org/2000/svg', 'text');
+                tooltip.setAttribute('x', e.target.getAttribute('x'));
+                tooltip.setAttribute('y', e.target.getAttribute('y') - 10);
+                tooltip.setAttribute('fill', 'white');
+                tooltip.textContent = `${this.barItems[i].key} - ${this.barItems[i].value}%`;
+                tooltip.classList.add('tooltip');
+                element.appendChild(tooltip);
+            });
+
+            // Remove tooltip on mouseout
+            rect.addEventListener('mouseout', () => {
+                const tooltips = document.querySelectorAll('.tooltip');
+                tooltips.forEach(tooltip => tooltip.remove());
+            });
 
             start += spacebetween;
 
