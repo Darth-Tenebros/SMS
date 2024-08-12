@@ -57,7 +57,6 @@ export class BarGraph{
             rect.setAttribute('fill', 'red');
             rect.appendChild(text);
 
-            // Add mouseover event to show tooltip
             rect.addEventListener('mouseover', (e) => {
                 const tooltip = document.createElementNS('http://www.w3.org/2000/svg', 'text');
                 tooltip.setAttribute('x', e.target.getAttribute('x'));
@@ -68,7 +67,6 @@ export class BarGraph{
                 element.appendChild(tooltip);
             });
 
-            // Remove tooltip on mouseout
             rect.addEventListener('mouseout', () => {
                 const tooltips = document.querySelectorAll('.tooltip');
                 tooltips.forEach(tooltip => tooltip.remove());
