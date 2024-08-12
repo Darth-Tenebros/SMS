@@ -104,6 +104,8 @@ function submit(){
     }
     submitButton.value = '';    
     form.reset();
+    submitButton.textContent = 'submit';
+    submitButton.style.backgroundColor = '#4CAF50'
 }
 submitButton.addEventListener('click', submit);
 
@@ -118,6 +120,8 @@ tableBody.addEventListener('click', function(event){
         Student.pouplateTable(tableBody);
     }
     else if([...event.target.classList].includes('update-button')){
+        submitButton.textContent = 'updating';
+        submitButton.style.backgroundColor = '#fffd8d'
         id = event.target.value;
 
         const student = Student.formatReadStudent(localStorage.getItem(id));    
@@ -184,3 +188,25 @@ close.addEventListener('click', function(){
 
 
 // TODO: BUILD A SMOL GRAPHING UTILITY/LIB
+
+function downloadPage(){
+    const lines = [];
+    let students = Student.getAllStudents();
+
+    for (let student of students) {
+        student = student.toString();
+        student = student.replaceAll('-', ',');
+        lines.push(student);
+    }
+
+    
+    const blob = new Blob([lines.join('\n')], {type: 'text/csv'})
+    const url = URL.createObjectURL(blob);
+    const a = document.createElement('a');
+    
+    a.href = url;
+    a.click();
+    a.target = '_blank';
+    
+}
+document.querySelector('#download').addEventListener('click', downloadPage);

@@ -116,6 +116,24 @@ export class Student{
     static deleteStudent(id){
         localStorage.removeItem(id);
     }
+
+    static formatStudentsToCSV(){
+        const lines = [];
+        let students = this.getAllStudents();
+
+        for (let student of students) {
+            student = student.toString();
+            student = student.replaceAll('-', ',');
+            lines.push(student);
+        }
+
+        const blob = new Blob([lines.join('\n')], {type: 'text/csv'})
+        const url = URL.createObjectURL(blob);
+        const a = document.createElement('a');
+        a.href = url;
+        a.download = 'students.csv';
+        a.click();
+    }
 }
 
 
