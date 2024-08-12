@@ -63,6 +63,7 @@ export class BarGraph{
                 tooltip.setAttribute('y', e.target.getAttribute('y') - 10);
                 tooltip.setAttribute('fill', 'white');
                 tooltip.textContent = `${this.barItems[i].key} - ${this.barItems[i].value}%`;
+                // tooltip.style.transform = 'rotateX(180deg)';
                 tooltip.classList.add('tooltip');
                 element.appendChild(tooltip);
             });
