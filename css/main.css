@@ -63,10 +63,7 @@ html, body {
     text-align: right;
 }
 
-#search{
-    height: 100%;
-    width: 20%;
-}
+
 
 .students-table {
     width: 100%;
@@ -94,6 +91,7 @@ html, body {
     background-color: #f1f1f1;
 }
 
+
 .add-form {
     background-color: #fff;
     border-radius: 5px;
@@ -102,33 +100,32 @@ html, body {
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
 }
 
-.add-form label {
-    display: block;
-    margin-bottom: 5px;
-    font-weight: bold;
-}
-
-.input-field {
-    width: calc(100% - 10px);
-    padding: 10px;
-    margin-bottom: 10px;
-    border: 1px solid #ccc;
-    border-radius: 5px;
-    font-size: 16px;
-}
-
-.submit-button {
-    display: inline-block;
+input[type=text] {
     width: 100%;
-    padding: 10px;
-    background-color: #007bff;
-    color: #fff;
+    padding: 12px 20px;
+    margin: 8px 0;
+    display: inline-block;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    box-sizing: border-box;
+  }
+
+#submit-student {
+    width: 100%;
+    background-color: #4CAF50;
+    color: white;
+    padding: 14px 20px;
+    margin: 8px 0;
     border: none;
-    border-radius: 5px;
-    font-size: 16px;
+    border-radius: 4px;
     cursor: pointer;
-    transition: background-color 0.3s ease;
 }
+
+#search{
+    height: 100%;
+    width: 50%;
+    display: block;
+}   
 
 .submit-button:hover {
     background-color: #0056b3;
@@ -168,6 +165,11 @@ html, body {
     height: 100%;
     background-color: #0056b3;
     overflow: auto; /* Allow overflow for the inner container */
+}
+
+#close{
+    font-weight: bolder;
+    cursor: pointer;
 }
 
 .scroll-container {
