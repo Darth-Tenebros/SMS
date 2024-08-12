@@ -100,6 +100,14 @@ html, body {
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
 }
 
+.student-actions{
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    gap: 3px;
+    padding: 10px 2px 0 2px;
+}
+
 input[type=text] {
     width: 100%;
     padding: 12px 20px;
@@ -121,6 +129,11 @@ input[type=text] {
     cursor: pointer;
 }
 
+/* .updating{
+    background-color: #fffd8d;
+    color: black;
+} */
+
 #search{
     height: 100%;
     width: 50%;
@@ -131,9 +144,13 @@ input[type=text] {
     background-color: #0056b3;
 }
 
+.update-button, .delete-button{
+    padding: 5px;
+    border-radius: 5px;
+}
+
 .update-button {
     background-color: #28a745;
-    margin-right: 5px;
 }
 
 .update-button:hover {
@@ -184,4 +201,20 @@ input[type=text] {
     background-color: #333;
     height: 100%;
     width: 150%; /* Set a larger width to force overflow */
+}
+
+#download{
+    display: block;
+    background-color: blue;
+    padding: 5px;
+    margin: 10px;
+    border-radius: 5px;
+    right: 0;
+}
+
+.tooltip{
+    transform: rotateX(180deg);
+    /* font-weight: bolder; */
+    /* color: blue; */
+    z-index: 1;
 }
