@@ -7,7 +7,7 @@ const fname = document.getElementById('fname-input');
 const lname = document.getElementById('lname-input');
 const mark = document.getElementById('mark-input');
 
-const svg = document.getElementById('graph');
+const graph = document.getElementById('graph');
 const statsModal = document.getElementById('Stats');
 const close = document.getElementById('close');
 const modal = document.getElementById('modal');
@@ -176,8 +176,9 @@ statsModal.addEventListener('click', function(){
         barItems.push(new BarItem(student.lastname, Number(student.mark)));
     }
 
+
     const barGraph = new BarGraph(barItems);
-    barGraph.render(svg);
+    barGraph.render(graph);
 
 
 });
@@ -191,7 +192,7 @@ close.addEventListener('click', function(){
 
 function downloadPage(){
     const lines = [];
-    let students = Student.getAllStudents();
+    const students = Student.getAllStudents();
 
     for (let student of students) {
         student = student.toString();

@@ -34,48 +34,90 @@ export class BarGraph{
         this.barItems = barItems
     }
 
+    #AggregateData(){
+        let fail = 0;
+        let fifties = 0;
+        let sixties = 0;
+        let seventies = 0;
+        let eighties = 0;
+        let ninties = 0;
+
+        let ranges = []
+
+        for (const barItem of this.barItems) {
+            if(barItem.value < 50){
+                fail++;
+            }
+            else if(barItem.value >= 50 && barItem.value <= 59){
+                fifties++;
+            }
+            else if(barItem.value >= 60 && barItem.value <= 69){
+                sixties++;
+            }
+            else if(barItem.value >= 70 && barItem.value <= 79){
+                seventies++;
+            }
+            else if(barItem.value >= 80 && barItem.value <= 89){
+                eighties++;
+            }
+            else if(barItem.value >= 90){
+                ninties++;
+            }
+        }
+        
+        ranges.push(fail);
+        ranges.push(fifties);
+        ranges.push(sixties);
+        ranges.push(seventies);
+        ranges.push(eighties);
+        ranges.push(ninties);
+
+        return ranges;
+    }
+
+    #getMeasuresOfCentralTendency(){
+        let mean, median, total = 0;
+        let scores = []
+
+        for (const item of this.barItems) {
+            total += item.value;
+            scores.push(item.value);
+        }
+
+        scores.sort(function(a, b){
+            return a-b;
+        });
+
+        mean = ((total/this.barItems.length) * 100 ) / 100;
+
+        if(scores.length % 2 === 0){
+            
+        }
+    }
+
 
     /**
      * render this bar grapgh
      *
-     * @param {SVGElement} element: the svg element this graph will be displayed on
+     * @param {HTMLDivElement} element: the svg element this graph will be displayed on
      */
     render(element){
-        let start = 3;
-        const spacebetween = 37;
+        element.innerHTML = '';
+        const ranges = this.#AggregateData();
+        const parentHeight = document.getElementsByClassName('inner')[0].clientHeight;
+        const mark_ranges = ['0-49', '50-59', '60-69', '70-79', '80-89', '90+']
 
-        for(let i = 0; i < this.barItems.length; i++){
-            const rect = document.createElementNS('http://www.w3.org/2000/svg', 'rect');
-            rect.setAttribute('y', '50');
+        for(let i = 0; i < ranges.length; i++){
 
-            const text = document.createElementNS('http://www.w3.org/2000/svg', 'title');
+            const barDiv = document.createElement('div');
+            barDiv.classList.add('bar');
+            const height = parentHeight * (ranges[i] / 100) * 5;
+            barDiv.style.height = `${height}px`;
+            barDiv.style.width = '80px';
+            barDiv.style.backgroundColor = `rgb(${Math.floor(Math.random() * 255)}, ${Math.floor(Math.random() * 255)}, ${Math.floor(Math.random() * 255)})`;
+            barDiv.title = mark_ranges[i];
 
-            const height = 100 * (this.barItems[i].value / 100);
-            rect.setAttribute('height', `${height}px`);
-            rect.setAttribute('width', '30px');
-            rect.setAttribute('x', `${start}px`);
-            rect.setAttribute('fill', 'red');
-            rect.appendChild(text);
-
-            rect.addEventListener('mouseover', (e) => {
-                const tooltip = document.createElementNS('http://www.w3.org/2000/svg', 'text');
-                tooltip.setAttribute('x', e.target.getAttribute('x'));
-                tooltip.setAttribute('y', e.target.getAttribute('y') - 10);
-                tooltip.setAttribute('fill', 'white');
-                tooltip.textContent = `${this.barItems[i].key} - ${this.barItems[i].value}%`;
-                // tooltip.style.transform = 'rotateX(180deg)';
-                tooltip.classList.add('tooltip');
-                element.appendChild(tooltip);
-            });
-
-            rect.addEventListener('mouseout', () => {
-                const tooltips = document.querySelectorAll('.tooltip');
-                tooltips.forEach(tooltip => tooltip.remove());
-            });
-
-            start += spacebetween;
-
-            element.appendChild(rect);
+            element.appendChild(barDiv);
         }
         
 

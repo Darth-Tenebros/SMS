@@ -201,6 +201,10 @@ input[type=text] {
     background-color: #333;
     height: 100%;
     width: 150%; /* Set a larger width to force overflow */
+    display: flex;
+    flex-direction: row;
+    gap: 10px;
+    transform: rotateX(180deg);
 }
 
 #download{
@@ -210,11 +214,4 @@ input[type=text] {
     margin: 10px;
     border-radius: 5px;
     right: 0;
-}
-
-.tooltip{
-    transform: rotateX(180deg);
-    /* font-weight: bolder; */
-    /* color: blue; */
-    z-index: 1;
 }
