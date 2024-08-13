@@ -200,7 +200,7 @@ export function createRow(student){
  * @param {HTMLTableRowElement[]} arr
  * @param {number} columnIndex
  * @param {boolean} isAscending
- * @returns {HTMLTableRowElement} arr
+ * @returns {HTMLTableRowElement[]}
  */
 export function bubbleSort(arr, columnIndex, isAscending) {
     const length = arr.length;
