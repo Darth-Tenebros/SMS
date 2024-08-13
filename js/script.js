@@ -1,5 +1,5 @@
 
-import { BarGraph, BarItem } from "./helper_functions/plot-monkey.js";
+import { BarGraph, BarItem } from "./helper_functions/plot_monkey.js";
 import { Student, createRow, bubbleSort } from "./helper_functions/student.js";
 
 const form = document.getElementById('form');
