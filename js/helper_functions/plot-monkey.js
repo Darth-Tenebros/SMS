@@ -88,11 +88,16 @@ export class BarGraph{
             return a-b;
         });
 
-        mean = ((total/this.barItems.length) * 100 ) / 100;
+        mean = total/this.barItems.length;
 
+        const mid = Math.floor(scores.length/2)
         if(scores.length % 2 === 0){
-            
+            median = (scores[mid] + scores[mid - 1]) / 2
+        }else{
+            median = scores[mid];
         }
+
+        return [mean, median]
     }
 
 
@@ -103,8 +108,11 @@ export class BarGraph{
      */
     render(element){
         element.innerHTML = '';
+        const graphFooter = document.getElementById('stats-footer');
+        graphFooter.innerHTML = '';
         const ranges = this.#AggregateData();
-        const parentHeight = document.getElementsByClassName('inner')[0].clientHeight;
+        const [mean, median] = this.#getMeasuresOfCentralTendency();
+        const parentHeight = document.getElementsByClassName('main-container')[0].clientHeight;
         const mark_ranges = ['0-49', '50-59', '60-69', '70-79', '80-89', '90+']
 
         for(let i = 0; i < ranges.length; i++){
@@ -112,13 +120,22 @@ export class BarGraph{
             const barDiv = document.createElement('div');
             barDiv.classList.add('bar');
             const height = parentHeight * (ranges[i] / 100) * 5;
+            console.log(parentHeight);
             barDiv.style.height = `${height}px`;
             barDiv.style.width = '80px';
             barDiv.style.backgroundColor = `rgb(${Math.floor(Math.random() * 255)}, ${Math.floor(Math.random() * 255)}, ${Math.floor(Math.random() * 255)})`;
             barDiv.title = mark_ranges[i];
 
-            element.appendChild(barDiv);
+            element.appendChild(barDiv); 
         }
+
+        const meanP = document.createElement('p');
+        meanP.textContent = `MEAN: ${mean.toFixed(2)}`;
+        const medianP = document.createElement('p');
+        medianP.textContent = `MEDIAN: ${median.toFixed(2)}`;
+
+        graphFooter.appendChild(meanP);
+        graphFooter.appendChild(medianP);
         
 
     }
