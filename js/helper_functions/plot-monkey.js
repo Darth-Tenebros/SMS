@@ -124,7 +124,7 @@ export class BarGraph{
             barDiv.style.height = `${height}px`;
             barDiv.style.width = '80px';
             barDiv.style.backgroundColor = `rgb(${Math.floor(Math.random() * 255)}, ${Math.floor(Math.random() * 255)}, ${Math.floor(Math.random() * 255)})`;
-            barDiv.title = mark_ranges[i];
+            barDiv.title = `${mark_ranges[i]} - ${ranges[i]} students` ;
 
             element.appendChild(barDiv); 
         }
