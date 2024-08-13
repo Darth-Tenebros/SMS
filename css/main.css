@@ -166,45 +166,46 @@ input[type=text] {
 }
 
 .modal {
-    border: 1px solid red;
+    border: 2px solid black;
+    border-radius: 5px;
     width: 60%;
-    height: 60%;
-    background-color: aqua;
+    height: auto;
+    background-color: #fff;
     position: fixed;
     left: 50%;
     transform: translate(-50%);
     display: none;
     z-index: 1;
-    overflow: hidden; /* No overflow for the modal itself */
+    overflow: auto;
 }
 
 .inner {
-    height: 100%;
-    background-color: #0056b3;
-    overflow: auto; /* Allow overflow for the inner container */
+    height: auto;
 }
 
 #close{
     font-weight: bolder;
     cursor: pointer;
+    margin: 5px;
 }
 
 .scroll-container {
     width: 100%;
     height: 100%;
     overflow-x: auto; /* Enable horizontal overflow */
-    overflow-y: hidden; /* Disable vertical overflow */
+    overflow-y: auto; /* Disable vertical overflow */
     background-color: #333;
 }
 
 #graph {
-    background-color: #333;
-    height: 100%;
-    width: 150%; /* Set a larger width to force overflow */
+    background-color: #b3afaf;
+    height: 80%;
+    width: 100%; /* Set a larger width to force overflow */
     display: flex;
     flex-direction: row;
     gap: 10px;
     transform: rotateX(180deg);
+    margin-bottom: 0;
 }
 
 #download{
@@ -214,4 +215,8 @@ input[type=text] {
     margin: 10px;
     border-radius: 5px;
     right: 0;
+}
+
+#stats-footer{
+    height: auto;
 }
