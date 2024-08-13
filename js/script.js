@@ -1,6 +1,6 @@
 
 import { BarGraph, BarItem } from "./helper_functions/plot-monkey.js";
-import { Student, createRow, findStudentIndex } from "./helper_functions/student.js";
+import { Student, createRow, bubbleSort } from "./helper_functions/student.js";
 
 const form = document.getElementById('form');
 const fname = document.getElementById('fname-input');
@@ -21,10 +21,8 @@ const tableBody = document.getElementsByClassName("students-table")[0].getElemen
 //TODO: CLEANUP FUNCTIONS
 function onLoad(){
     Student.pouplateTable(tableBody);
-
     const table = document.querySelector('.students-table');
     const headers = table.querySelectorAll('.table-header');
-    const tbody = table.querySelector('.table-body');
     let isAscending = true;
 
     headers.forEach(function(header){
@@ -41,47 +39,10 @@ function onLoad(){
     });
 
     function sortTable(columnIndex) {
-        const rows = Array.from(tbody.querySelectorAll('tr'));
-        bubbleSort(rows, columnIndex);
-        tbody.innerHTML = '';
-        rows.forEach(row => tbody.appendChild(row));
-    }
-
-    function bubbleSort(arr, columnIndex) {
-        const length = arr.length;
-
-        for (let i = 0; i < length - 1; i++) {
-            for (let j = 0; j < length - 1 - i; j++) {
-                const cellA = arr[j].children[columnIndex].textContent.trim();
-                const cellB = arr[j + 1].children[columnIndex].textContent.trim();
-
-                let comparison = 0;
-
-                // column 3 has the marks (number)
-                if (columnIndex === 3) {
-                    comparison = parseFloat(cellA) - parseFloat(cellB);
-                } else {
-                    comparison = cellA.localeCompare(cellB);
-                }
-                
-                // if we're asc
-                if (isAscending) {
-                    // and comparator is > 0
-                    if (comparison > 0) {
-                        // the bigger item j is swapped with the smaller item j+1
-                        const temp = arr[j];
-                        arr[j] = arr[j + 1];
-                        arr[j + 1] = temp;
-                    }
-                } else {
-                    if (comparison < 0) {
-                        const temp = arr[j];
-                        arr[j] = arr[j + 1];
-                        arr[j + 1] = temp;
-                    }
-                }
-            }
-        }
+        const rows = Array.from(tableBody.querySelectorAll('tr'));
+        const sortedRows = bubbleSort(rows, columnIndex, isAscending);
+        tableBody.innerHTML = '';
+        sortedRows.forEach(row => tableBody.appendChild(row));
     }
 }
 document.addEventListener('DOMContentLoaded', onLoad);

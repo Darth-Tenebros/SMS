@@ -195,21 +195,47 @@ export function createRow(student){
 
 
 /**
- * finds a student in an array and returns the index
+ * function bubblesort sorts a given array based on the given isAscending criteria
  *
- * @param {number} id
- * @param {Student[]} arr
- * @returns {number}
+ * @param {HTMLTableRowElement[]} arr
+ * @param {number} columnIndex
+ * @param {boolean} isAscending
+ * @returns {HTMLTableRowElement} arr
  */
-export function findStudentIndex(id, arr){
-    let index = -1;
+export function bubbleSort(arr, columnIndex, isAscending) {
+    const length = arr.length;
 
-    for(let i = 0; i < arr.length; i++){
-        if(arr[i].id === id){
-            index = i;
-            break;
+    for (let i = 0; i < length - 1; i++) {
+        for (let j = 0; j < length - 1 - i; j++) {
+            const cellA = arr[j].children[columnIndex].textContent.trim();
+            const cellB = arr[j + 1].children[columnIndex].textContent.trim();
+
+            let comparison = 0;
+
+            // column 3 has the marks (number)
+            if (columnIndex === 3) {
+                comparison = parseFloat(cellA) - parseFloat(cellB);
+            } else {
+                comparison = cellA.localeCompare(cellB);
+            }
+            
+            // if we're asc
+            if (isAscending) {
+                // and comparator is > 0
+                if (comparison > 0) {
+                    // the bigger item j is swapped with the smaller item j+1
+                    const temp = arr[j];
+                    arr[j] = arr[j + 1];
+                    arr[j + 1] = temp;
+                }
+            } else {
+                if (comparison < 0) {
+                    const temp = arr[j];
+                    arr[j] = arr[j + 1];
+                    arr[j + 1] = temp;
+                }
+            }
         }
     }
-
-    return index;
+    return arr;
 }
