@@ -17,6 +17,9 @@ const searchField = document.getElementById('search');
 
 const tableBody = document.getElementsByClassName("students-table")[0].getElementsByClassName("table-body")[0];
 
+const csvfile = document.getElementById('csvfile');
+
+
 
 //TODO: CLEANUP FUNCTIONS
 function onLoad(){
@@ -85,7 +88,7 @@ tableBody.addEventListener('click', function(event){
         submitButton.style.backgroundColor = '#fffd8d'
         id = event.target.value;
 
-        const student = Student.formatReadStudent(localStorage.getItem(id));    
+        const student = Student.formatReadStudent(localStorage.getItem(id));   
         fname.value = student.firstname;
         lname.value = student.lastname;
         mark.value = student.mark;
@@ -151,7 +154,7 @@ close.addEventListener('click', function(){
 
 // TODO: BUILD A SMOL GRAPHING UTILITY/LIB
 
-function downloadPage(){
+function downloadData(){
     const lines = [];
     const students = Student.getAllStudents();
 
@@ -167,8 +170,29 @@ function downloadPage(){
     const a = document.createElement('a');
     
     a.href = url;
+    a.download = 'students_data.csv';
     a.click();
     a.target = '_blank';
     
 }
-document.querySelector('#download').addEventListener('click', downloadPage);
+document.querySelector('#download').addEventListener('click', downloadData);
+
+
+function readUploadedFile(){
+    const file = csvfile.files[0];
+    let data = [];
+
+    if(file && file.type === 'text/csv'){
+        const fileReader  = new FileReader();
+        fileReader.readAsText(file);
+        fileReader.addEventListener('load', function(){
+            data = fileReader.result.split('\n');
+            for (const line of data) {
+                Student.write(Student.formatReadStudent(line));
+            }
+            location.reload();
+
+        }, false);
+    }
+}
+csvfile.addEventListener('change', readUploadedFile);
