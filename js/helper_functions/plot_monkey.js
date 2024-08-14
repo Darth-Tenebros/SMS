@@ -34,6 +34,11 @@ export class BarGraph{
         this.barItems = barItems
     }
 
+    /**
+     * calculates the number of people who scored in each range
+     *
+     * @returns {number[]}
+     */
     #AggregateData(){
         let fail = 0;
         let fifties = 0;
@@ -120,7 +125,6 @@ export class BarGraph{
             const barDiv = document.createElement('div');
             barDiv.classList.add('bar');
             const height = parentHeight * (ranges[i] / 100) * 5;
-            console.log(parentHeight);
             barDiv.style.height = `${height}px`;
             barDiv.style.width = '80px';
             barDiv.style.backgroundColor = `rgb(${Math.floor(Math.random() * 255)}, ${Math.floor(Math.random() * 255)}, ${Math.floor(Math.random() * 255)})`;
