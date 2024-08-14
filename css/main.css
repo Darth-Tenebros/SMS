@@ -216,6 +216,7 @@ input[type=text] {
     margin: 10px;
     border-radius: 5px;
     right: 0;
+    color: white;
 }
 
 #stats-footer{
