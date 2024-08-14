@@ -55,7 +55,7 @@
         <div class="add-form">
             <form action="" autocomplete="off" id="form">
                 <label for="fname-input">First Name</label>
-                <input type="text" value="" id="fname-input ">
+                <input type="text" value="" id="fname-input">
                 <br>
                 <label for="lname-input">Last Name</label>
                 <input type="text" value="" id="lname-input">
@@ -66,7 +66,13 @@
     
                 <button type="button" id="submit-student" value="">Submit</button>
             </form>
+
+            <div class="upload-container">
+                <label for="csvfile">Upload CSV File</label>
+                <input type="file" accept=".csv" name="" id="csvfile">
+            </div>
         </div>
+        
         <div class="modal" id="modal">
             <span id="close">&times;</span>
             <div class="inner">
