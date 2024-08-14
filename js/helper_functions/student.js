@@ -84,6 +84,9 @@ export class Student{
     }
 
     static formatReadStudent(studentString){
+        if(studentString.indexOf(',') > -1){
+            studentString = studentString.replaceAll(',', '-')
+        }
         const attributes = studentString.split('-');
         const student = new Student(attributes[1], attributes[2], attributes[3]);
         student.#Id = attributes[0];    
