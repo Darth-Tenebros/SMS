@@ -47,6 +47,16 @@ html, body {
     color: #fff;
 }
 
+#download{
+    display: block;
+    background-color: blue;
+    padding: 5px;
+    margin: 10px;
+    border-radius: 5px;
+    right: 0;
+    color: white;
+}
+
 .table-container {
     background-color: #fff;
     border-radius: 5px;
@@ -62,8 +72,6 @@ html, body {
     height: 3%;
     text-align: right;
 }
-
-
 
 .students-table {
     margin-top: 20px;
@@ -92,7 +100,6 @@ html, body {
     background-color: #f1f1f1;
 }
 
-
 .add-form {
     background-color: #fff;
     border-radius: 5px;
@@ -117,7 +124,7 @@ input[type=text] {
     border: 1px solid #ccc;
     border-radius: 4px;
     box-sizing: border-box;
-  }
+}
 
 #submit-student {
     width: 100%;
@@ -129,11 +136,6 @@ input[type=text] {
     border-radius: 4px;
     cursor: pointer;
 }
-
-/* .updating{
-    background-color: #fffd8d;
-    color: black;
-} */
 
 #search{
     height: 100%;
@@ -170,7 +172,7 @@ input[type=text] {
     border: 2px solid black;
     border-radius: 5px;
     width: 60%;
-    height: auto;
+    height: 80%;
     background-color: #fff;
     position: fixed;
     left: 50%;
@@ -181,7 +183,8 @@ input[type=text] {
 }
 
 .inner {
-    height: auto;
+    height: 70%;
+    margin-bottom: 10px;
 }
 
 #close{
@@ -191,32 +194,16 @@ input[type=text] {
 }
 
 .scroll-container {
-    width: 100%;
-    height: 100%;
-    overflow-x: auto; /* Enable horizontal overflow */
-    overflow-y: auto; /* Disable vertical overflow */
-    background-color: #333;
-}
-
-#graph {
+    overflow-x: auto;
+    overflow-y: auto;
     background-color: #b3afaf;
-    height: 80%;
-    width: 100%; /* Set a larger width to force overflow */
+    height: 100%;
+    width: 100%;
     display: flex;
     flex-direction: row;
     gap: 10px;
     transform: rotateX(180deg);
     margin-bottom: 0;
-}
-
-#download{
-    display: block;
-    background-color: blue;
-    padding: 5px;
-    margin: 10px;
-    border-radius: 5px;
-    right: 0;
-    color: white;
 }
 
 #stats-footer{
@@ -242,4 +229,19 @@ input[type=text] {
     top: 0;
     left: 0;
     font-weight:900;
+}
+
+#x-labels{
+    height: 5px;
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    gap: 10px;
+    margin-bottom: 40px;
+}
+
+.x-axis-label{
+    display: inline-block;
+    width: 80px;
+    text-align: center;
 }
