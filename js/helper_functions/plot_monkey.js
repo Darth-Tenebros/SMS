@@ -119,6 +119,8 @@ export class BarGraph{
         const [mean, median] = this.#getMeasuresOfCentralTendency();
         const parentHeight = document.getElementsByClassName('main-container')[0].clientHeight;
         const mark_ranges = ['0-49', '50-59', '60-69', '70-79', '80-89', '90+']
+        const x_labels = document.getElementById('x-labels');
+        x_labels.innerHTML = '';
 
         for(let i = 0; i < ranges.length; i++){
 
@@ -126,9 +128,15 @@ export class BarGraph{
             barDiv.classList.add('bar');
             const height = parentHeight * (ranges[i] / 100) * 5;
             barDiv.style.height = `${height}px`;
+            console.log(height);
             barDiv.style.width = '80px';
             barDiv.style.backgroundColor = `rgb(${Math.floor(Math.random() * 255)}, ${Math.floor(Math.random() * 255)}, ${Math.floor(Math.random() * 255)})`;
-            barDiv.title = `${mark_ranges[i]} - ${ranges[i]} students` ;
+            barDiv.title = `${mark_ranges[i]} - ${ranges[i]} students`;
+
+            const span = document.createElement('span');
+            span.textContent = mark_ranges[i];
+            span.classList.add('x-axis-label');
+            x_labels.appendChild(span);
 
             element.appendChild(barDiv); 
         }
