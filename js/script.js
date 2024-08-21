@@ -84,8 +84,9 @@ tableBody.addEventListener('click', function(event){
         Student.pouplateTable(tableBody);
     }
     else if([...event.target.classList].includes('update-button')){
-        submitButton.textContent = 'updating';
-        submitButton.style.backgroundColor = '#fffd8d'
+        submitButton.textContent = 'update..';
+        submitButton.style.backgroundColor = '#fffd8d';
+        submitButton.style.color = 'black';
         id = event.target.value;
 
         const student = Student.formatReadStudent(localStorage.getItem(id));   
