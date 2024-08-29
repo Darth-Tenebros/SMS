@@ -11,8 +11,9 @@ const subjectSchema = new mongoose.Schema({
 });
 
 const homeRoomSchema = new mongoose.Schema({
+    //e.g: grade 9A
     name: {type: String, required: true},
-    teacher: {type: mongoose.Schema.Types.ObjectId, required: false, ref: Teacher},
+    teacher: {type: mongoose.Schema.Types.ObjectId, required: false, ref: 'Teacher'},
 });
 const HomeRoomModel = mongoose.model('HomeRoom', homeRoomSchema);
 
@@ -23,7 +24,7 @@ const studentSchema = new mongoose.Schema({
         phone: {type: String, required: true}
     },
     subjects: {type: [subjectSchema], required: true},
-    homeRoom: {type: mongoose.Schema.Types.ObjectId, required: true, ref: HomeRoom}
+    homeRoom: {type: mongoose.Schema.Types.ObjectId, required: true, ref: 'HomeRoom'}
 });
 const StudentModel = mongoose.model('Student', studentSchema);
 
@@ -33,7 +34,7 @@ const teacherSchema = new mongoose.Schema({
         email: {type: String, required: true},
         phone: {type: String, required: true}
     },
-    homeRoom: {type: mongoose.Schema.Types.ObjectId, required: true, ref: HomeRoom}
+    homeRoom: {type: mongoose.Schema.Types.ObjectId, required: true, ref: 'HomeRoom'}
 });
 const TeacherModel = mongoose.model('Teacher', teacherSchema);
 
