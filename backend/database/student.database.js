@@ -50,7 +50,7 @@ exports.getAllStudents = () => {
 }
 
 exports.createStudent = async (student) => {
-    const homeRoom = await model.HomeRoomModel.find({name: student.homeRoom})
+    const homeRoom = await model.HomeRoomModel.find({name: student.homeRoom}) //middleware
     
     return model.StudentModel({
         name: student.name,
@@ -61,4 +61,8 @@ exports.createStudent = async (student) => {
         subjects: [...student.subjects],
         homeRoom: homeRoom[0]._id
     }).save()
+}
+
+exports.updateStudent = (student) => {
+
 }
