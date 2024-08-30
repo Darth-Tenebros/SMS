@@ -73,3 +73,9 @@ exports.updateStudent = (id, updatedData) => {
         {$set: updatedData}
     );
 }
+
+exports.deleteStudentById = (id) => {
+    return model.StudentModel.deleteOne(
+        {_id: id}
+    )
+}
