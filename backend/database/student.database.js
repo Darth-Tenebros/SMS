@@ -45,4 +45,6 @@ const seed = async () => {
 
 }
 
-seed();
+exports.getAllStudents = () => {
+    return model.StudentModel.find({});
+}
