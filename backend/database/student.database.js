@@ -48,3 +48,17 @@ const seed = async () => {
 exports.getAllStudents = () => {
     return model.StudentModel.find({});
 }
+
+exports.createStudent = async (student) => {
+    const homeRoom = await model.HomeRoomModel.find({name: student.homeRoom})
+    
+    return model.StudentModel({
+        name: student.name,
+        contact: {
+            email: student.contact.email,
+            phone: student.contact.phone
+        },
+        subjects: [...student.subjects],
+        homeRoom: homeRoom[0]._id
+    }).save()
+}
