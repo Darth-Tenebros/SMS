@@ -74,3 +74,29 @@ exports.updateStudent = (req, res) => {
         })
     });
 }
+
+exports.deleteStudentById = (req, res) => {
+    const {id} = req.params;
+
+    if(!id){
+        res.status(400)
+        .send({
+            message: "you need to provide the id of the record you want to update"
+        })
+    }
+
+    repository.deleteStudentById(id)
+    .then((result) => {
+        res.status(200)
+        .json({
+            data: result
+        })
+    })
+    .catch((error) => {
+        res.status(500)
+        .json({
+            message: "failed to delete student",
+            data: error
+        })
+    })
+}
