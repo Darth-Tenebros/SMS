@@ -30,7 +30,7 @@ exports.createStudent = (req, res) => {
 
     repository.createStudent(req.body)
     .then((result) => {
-        res.status(200)
+        res.status(201)
         .json({
             data: result,
         })
