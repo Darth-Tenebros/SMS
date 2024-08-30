@@ -19,6 +19,15 @@ exports.getAllStudents = (req, res) => {
 }
 
 exports.createStudent = (req, res) => {
+    const {name, contact, subjects, homeRoom} = req.body;
+    
+    if(!name || !contact.email || !contact.phone || !subjects.length > 0 || !homeRoom){
+        res.status(400)
+        .send({
+            message: "all fields need to be filled"
+        })
+    }
+
     repository.createStudent(req.body)
     .then((result) => {
         res.status(200)
