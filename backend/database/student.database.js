@@ -49,6 +49,10 @@ exports.getAllStudents = () => {
     return model.StudentModel.find({});
 }
 
+exports.getById = (id) => {
+    return model.StudentModel.find({_id: id});
+}
+
 exports.createStudent = async (student) => {
     const homeRoom = await model.HomeRoomModel.find({name: student.homeRoom}) //middleware
     
@@ -63,6 +67,9 @@ exports.createStudent = async (student) => {
     }).save()
 }
 
-exports.updateStudent = (student) => {
-
+exports.updateStudent = (id, updatedData) => {
+    return model.StudentModel.updateOne(
+        {_id: id},
+        {$set: updatedData}
+    );
 }
