@@ -17,3 +17,20 @@ exports.getAllStudents = (req, res) => {
         })
     });
 }
+
+exports.createStudent = (req, res) => {
+    repository.createStudent(req.body)
+    .then((result) => {
+        res.status(200)
+        .json({
+            data: result,
+        })
+    })
+    .catch((error) => {
+        res.status(500)
+        .json({
+            message: "create student failed",
+            data: error
+        })
+    });
+}
