@@ -8,4 +8,10 @@ router.post("/students/", studentController.createStudent);
 
 router.put("/students/:id", studentController.updateStudent);
 
+router.get("/teachers/", teacherController.getAllTeachers);
+
+router.post("/teachers/", teacherController.createTeacher);
+
+router.put("/teachers/:id", teacherController.updateTeacher);
+
 module.exports = router;
