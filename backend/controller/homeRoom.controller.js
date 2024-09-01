@@ -1,5 +1,5 @@
 
-const repository = require('../database/homeroom.database');
+const repository = require('../database/homeRoom.database');
 
 exports.getAllHomeRooms = (req, res) => {
     repository.getAllHomeRooms()

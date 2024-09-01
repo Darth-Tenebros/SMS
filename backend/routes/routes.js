@@ -2,7 +2,7 @@ const express = require('express');
 const router = express.Router();
 const studentController = require('../controller/student.controller');
 const teacherController = require('../controller/teacher.controller');
-const homeRoomController = require('../controller/homeroom.controller');
+const homeRoomController = require('../controller/homeRoom.controller');
 
 router.get("/students/", studentController.getAllStudents);
 
