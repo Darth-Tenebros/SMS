@@ -1,0 +1,54 @@
+
+const repository = require('../database/homeroom.database');
+
+exports.getAllHomeRooms = (req, res) => {
+    repository.getAllHomeRooms()
+    .then((result) => {
+        res.status(200).json({ data: result });
+    })
+    .catch((error) => {
+        res.status(500).json({
+            message: "get all homerooms failed",
+            data: error
+        });
+    });
+}
+
+exports.createHomeRoom = (req, res) => {
+    const {name, teacher} = req.body;
+
+    if(!name || !teacher){
+        return res.status(400).send({ message: "all fields need to be filled" });
+    }
+
+    repository.createHomeRoom(req.body)
+    .then((result) => {
+        res.status(201).json({ data: result });
+    })
+    .catch((error) => {
+        res.status(500).json({
+            message: "create homeroom failed",
+            data: error
+        });
+    });
+}
+
+exports.updateHomeRoom = (req, res) => {
+    const {id} = req.params;
+    const updatedData = req.body;
+
+    if(!id){
+        return res.status(400).send({ message: "you need to provide the id of the record you want to update" });
+    }
+
+    repository.updateHomeRoom(id, updatedData)
+    .then((result) => {
+        res.status(200).json({ data: result });
+    })
+    .catch((error) => {
+        res.status(500).json({
+            message: "failed to update homeroom",
+            data: error
+        });
+    });
+}
