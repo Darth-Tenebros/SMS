@@ -9,6 +9,12 @@ exports.getTeacherById = (id) => {
     return model.TeacherModel.find({_id: id});
 }
 
+exports.getTeacherByEmail = (email) => {
+    return model.TeacherModel.findOne(
+        {"contact.email": email}
+    )
+}
+
 exports.createTeacher = async (teacher) => {
     const homeRoom = await model.HomeRoomModel.find({name: teacher.homeRoom}) // middleware
     
