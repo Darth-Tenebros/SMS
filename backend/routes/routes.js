@@ -4,6 +4,7 @@ const studentController = require('../controller/student.controller');
 const teacherController = require('../controller/teacher.controller');
 const homeRoomController = require('../controller/homeRoom.controller');
 
+// student
 router.get("/students/", studentController.getAllStudents);
 
 router.post("/students/", studentController.createStudent);
@@ -11,12 +12,15 @@ router.post("/students/", studentController.createStudent);
 router.put("/students/:id", studentController.updateStudent);
 
 router.delete("/students/:id", studentController.deleteStudentById);
+
+// teacher
 router.get("/teachers/", teacherController.getAllTeachers);
 
 router.post("/teachers/", teacherController.createTeacher);
 
 router.put("/teachers/:id", teacherController.updateTeacher);
 
+// homeroom
 router.get("/homerooms/", homeRoomController.getAllHomeRooms);
 
 router.post("/homerooms/", homeRoomController.createHomeRoom);
