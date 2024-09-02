@@ -38,7 +38,7 @@ exports.updateHomeRoom = (req, res) => {
     const updatedData = req.body;
 
     if(!id){
-        return res.status(400).send({ message: "you need to provide the id of the record you want to update" });
+        res.status(400).send({ message: "you need to provide the id of the record you want to update" });
     }
 
     repository.updateHomeRoom(id, updatedData)
