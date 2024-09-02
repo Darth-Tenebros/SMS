@@ -28,7 +28,7 @@ const studentSchema = new mongoose.Schema({
     },
     subjects: {type: [subjectSchema], required: true},
     homeRoom: {type: mongoose.Schema.Types.ObjectId, required: true, ref: 'HomeRoom'},
-    role: {type: String, enum: ['student, teacher', 'superuser']  ,default: "student", require: true}
+    role: {type: String, default: "student", require: true}
 });
 const StudentModel = mongoose.model('Student', studentSchema);
 
@@ -40,7 +40,7 @@ const teacherSchema = new mongoose.Schema({
         phone: {type: String, required: true}
     },
     homeRoom: {type: mongoose.Schema.Types.ObjectId, required: true, ref: 'HomeRoom'},
-    role: {type: String, enum: ['student, teacher', 'superuser'], default: "teacher", require: true}
+    role: {type: String, default: "teacher", require: true}
 
 });
 const TeacherModel = mongoose.model('Teacher', teacherSchema);
