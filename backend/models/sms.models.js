@@ -21,6 +21,7 @@ const HomeRoomModel = mongoose.model('HomeRoom', homeRoomSchema);
 
 const studentSchema = new mongoose.Schema({
     name: {type: String, required: true},
+    password: {type: String, require: true},
     contact: {
         email: {type: String, required: true},
         phone: {type: String, required: true}
@@ -33,6 +34,7 @@ const StudentModel = mongoose.model('Student', studentSchema);
 
 const teacherSchema = new mongoose.Schema({
     name: {type: String, required: true},
+    password: {type: String, require: true},
     contact: {
         email: {type: String, required: true},
         phone: {type: String, required: true}
