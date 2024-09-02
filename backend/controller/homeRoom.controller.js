@@ -18,7 +18,7 @@ exports.createHomeRoom = (req, res) => {
     const {name, teacher} = req.body;
 
     if(!name || !teacher){
-        return res.status(400).send({ message: "all fields need to be filled" });
+        res.status(400).send({ message: "all fields need to be filled" });
     }
 
     repository.createHomeRoom(req.body)
@@ -50,5 +50,30 @@ exports.updateHomeRoom = (req, res) => {
             message: "failed to update homeroom",
             data: error
         });
+    });
+}
+
+exports.deleteHomeRoomById = (req, res) => {
+    const {id} = req.params;
+
+    if(!id){
+        res.status(400).send({
+            message: "you must provide the id"
+        })
+    }
+
+    repository.deleteHomeRoomById(id)
+    .then((result) => {
+        res.status(200)
+        .json({
+            data: result
+        })
+    })
+    .catch((error) => {
+        res.status(500)
+        .json({
+            message: "failed to delete home room",
+            data: error
+        })
     });
 }

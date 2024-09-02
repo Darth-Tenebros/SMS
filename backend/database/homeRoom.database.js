@@ -22,3 +22,9 @@ exports.updateHomeRoom = (id, updatedData) => {
         {$set: updatedData}
     );
 }
+
+exports.deleteHomeRoomById = (id) => {
+    return model.HomeRoomModel.deleteOne(
+        {_id : id}
+    );
+}
