@@ -1,5 +1,7 @@
 
 const repository = require('../database/teacher.database');
+const bcrypt = require('bcryptjs');
+const auth = require('../middleware/auth/auth.utils')
 
 exports.getAllTeachers = (req, res) => {
     repository.getAllTeachers()
@@ -11,6 +13,32 @@ exports.getAllTeachers = (req, res) => {
             message: "get all teachers failed",
             data: error
         });
+    });
+}
+
+exports.getTeacherByEmail = (req, res) => {
+    const {email} = req.body;
+
+    if(!email){
+        res.status(400)
+        .send({
+            message: "you need to provide the email",
+        })
+    }
+
+    repository.getTeacherByEmail(email)
+    .then((result) => {
+        res.status(200)
+        .json({
+            data: result
+        })
+    })
+    .catch((error) => {
+        res.status(500)
+        .json({
+            message: "failed to gte teacher by email",
+            data: error
+        })
     });
 }
 
@@ -77,4 +105,38 @@ exports.deleteTeacherById = (req, res) => {
             data: error
         })
     });
+}
+
+exports.login = async (req, res) => {
+    const {email, password} = req.body;
+
+    if(!email || ! password){
+        res.status(400).send({
+            message: "you need to provide all details"
+        })
+    }
+
+    let teacher = await repository.getTeacherByEmail(email);
+    teacher = teacher._doc;
+    if(!teacher){
+        res.status(404).send({
+            message: `no teacher with email ${email} has been found`
+        })
+    }
+
+    
+    const isValid = bcrypt.compare(password, teacher.password);
+    if(!isValid){
+        res.status(401)
+        .send({
+            message: "invalid credentials"
+        })
+    }
+
+    const token = auth.generateJWTToken(teacher);
+    res.status(200)
+    .json({
+        data: token
+    })
+    
 }
