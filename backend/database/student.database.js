@@ -1,4 +1,5 @@
 const model = require('../models/sms.models');
+const hash = require('../middleware/auth/auth.utils')
 
 const seed = async () => {
     const homeRooms = await model.HomeRoomModel.insertMany([
@@ -8,9 +9,24 @@ const seed = async () => {
     ]);
     
     await model.TeacherModel.insertMany([
-        { name: 'Mr. Smith', contact: { email: 'smith@example.com', phone: '555-1234' }, homeRoom: homeRooms[0]._id },
-        { name: 'Ms. Johnson', contact: { email: 'johnson@example.com', phone: '555-5678' }, homeRoom: homeRooms[1]._id },
-        { name: 'Mrs. Williams', contact: { email: 'williams@example.com', phone: '555-8765' }, homeRoom: homeRooms[2]._id },
+        {
+            name: 'Mr. Smith',
+            password: hash.hashPassword('password'),
+            contact: { email: 'smith@example.com', phone: '555-1234' },
+            homeRoom: homeRooms[0]._id
+        },
+        {
+            name: 'Ms. Johnson',
+            password: hash.hashPassword('password1'),
+            contact: { email: 'johnson@example.com', phone: '555-5678' },
+            homeRoom: homeRooms[1]._id
+        },
+        {
+            name: 'Mrs. Williams',
+            password: hash.hashPassword('password2'),
+            contact: { email: 'williams@example.com', phone: '555-8765' },
+            homeRoom: homeRooms[2]._id
+        },
     ]);
 
     await model.StudentModel.insertMany([
