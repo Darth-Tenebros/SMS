@@ -20,6 +20,8 @@ router.post("/teachers/", teacherController.createTeacher);
 
 router.put("/teachers/:id", teacherController.updateTeacher);
 
+router.post("/login/", teacherController.login);
+
 // homeroom
 router.get("/homerooms/", homeRoomController.getAllHomeRooms);
 
