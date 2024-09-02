@@ -28,3 +28,9 @@ exports.updateTeacher = (id, updatedData) => {
         {$set: updatedData}
     );
 }
+
+exports.deleteTeacherById = (id) => {
+    return model.TeacherModel.deleteOne(
+        {_id: id}
+    );
+}
