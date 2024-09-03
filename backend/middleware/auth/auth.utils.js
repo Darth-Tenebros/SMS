@@ -63,8 +63,7 @@ const login = async (req, res) => {
 }
 
 const verifyTokenMiddleWare = (req, res, next) => {
-    const token = req.headers['authorization'];
-    console.log(token);
+    let token = req.headers['authorization'];
 
     if(!token){
         return res.status(403)
@@ -73,7 +72,8 @@ const verifyTokenMiddleWare = (req, res, next) => {
                 });
     }
 
-    jwt.verify(token.split('')[1], SECRET_KEY, (err, decoded) => {
+    token = token.split(' ')[1];
+    jwt.verify(token, SECRET_KEY, (err, decoded) => {
         if(err){
             return res.status(401)
                     .send({
