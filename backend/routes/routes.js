@@ -21,6 +21,8 @@ router.post("/teachers/", teacherController.createTeacher);
 
 router.put("/teachers/:id", teacherController.updateTeacher);
 
+
+// auth
 router.post("/login/", auth.login);
 
 // homeroom
