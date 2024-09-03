@@ -6,31 +6,31 @@ const homeRoomController = require('../controller/homeRoom.controller');
 const {login, verifyTokenMiddleWare, authorizeRolesMiddleware} = require('../middleware/auth/auth.utils');
 
 // student
-router.get("/students/", verifyTokenMiddleWare, studentController.getAllStudents);
+router.get("/students/", verifyTokenMiddleWare, authorizeRolesMiddleware(['teacher', 'student']), studentController.getAllStudents);
 
-router.post("/students/", studentController.createStudent);
+router.post("/students/", verifyTokenMiddleWare, authorizeRolesMiddleware(['teacher']), studentController.createStudent);
 
-router.put("/students/:id", studentController.updateStudent);
+router.put("/students/:id", verifyTokenMiddleWare, authorizeRolesMiddleware(['teacher']), studentController.updateStudent);
 
-router.delete("/students/:id", studentController.deleteStudentById);
+router.delete("/students/:id", verifyTokenMiddleWare, authorizeRolesMiddleware(['teacher']), studentController.deleteStudentById);
 
 // teacher
-router.get("/teachers/", verifyTokenMiddleWare, teacherController.getAllTeachers);
+router.get("/teachers/", verifyTokenMiddleWare, authorizeRolesMiddleware(['teacher']), teacherController.getAllTeachers);
 
-router.post("/teachers/", teacherController.createTeacher);
+router.post("/teachers/", verifyTokenMiddleWare, authorizeRolesMiddleware(['teacher']), teacherController.createTeacher);
 
-router.put("/teachers/:id", teacherController.updateTeacher);
+router.put("/teachers/:id", verifyTokenMiddleWare, authorizeRolesMiddleware(['teacher']), teacherController.updateTeacher);
 
 
-// auth
+// authenticate
 router.post("/login/", login);
 
 // homeroom
-router.get("/homerooms/", homeRoomController.getAllHomeRooms);
+router.get("/homerooms/", verifyTokenMiddleWare, authorizeRolesMiddleware(['teacher', 'student']), homeRoomController.getAllHomeRooms);
 
-router.post("/homerooms/", homeRoomController.createHomeRoom);
+router.post("/homerooms/", verifyTokenMiddleWare, authorizeRolesMiddleware(['teacher']), homeRoomController.createHomeRoom);
 
-router.put("/homerooms/:id", homeRoomController.updateHomeRoom);
+router.put("/homerooms/:id", verifyTokenMiddleWare, authorizeRolesMiddleware(['teacher']), homeRoomController.updateHomeRoom);
 
 
 module.exports = router;
