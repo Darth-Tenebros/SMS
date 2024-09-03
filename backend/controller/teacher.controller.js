@@ -126,7 +126,6 @@ exports.login = async (req, res) => {
 
     
     const isValid = bcrypt.compareSync(password, teacher.password);
-    console.log("isvalid:", isValid)
     if(isValid){
         const token = auth.generateJWTToken(teacher);
         res.status(200)
