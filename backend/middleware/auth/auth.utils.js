@@ -94,6 +94,7 @@ const authorizeRolesMiddleware = (roles) => {
                         message: "forbidden"
                     })
         }
+        next();
     }
 }
 
