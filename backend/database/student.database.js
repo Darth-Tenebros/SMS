@@ -32,6 +32,7 @@ const seed = async () => {
     await model.StudentModel.insertMany([
         {
             name: 'Alice Brown',
+            password: hash.hashPassword('student'),
             contact: { email: 'alice.brown@example.com', phone: '555-1111' },
             subjects: [
                 { name: 'Mathematics', mark: 85 },
@@ -41,6 +42,7 @@ const seed = async () => {
         },
         {
             name: 'Bob Green',
+            password: hash.hashPassword('student1'),
             contact: { email: 'bob.green@example.com', phone: '555-2222' },
             subjects: [
                 { name: 'English', mark: 75 },
@@ -50,6 +52,7 @@ const seed = async () => {
         },
         {
             name: 'Charlie Davis',
+            password: hash.hashPassword('student2'),
             contact: { email: 'charlie.davis@example.com', phone: '555-3333' },
             subjects: [
                 { name: 'Biology', mark: 88 },
@@ -60,6 +63,7 @@ const seed = async () => {
     ]);
 
 }
+seed();
 
 exports.getAllStudents = () => {
     return model.StudentModel.find({});
