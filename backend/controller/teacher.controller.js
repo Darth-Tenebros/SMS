@@ -125,18 +125,20 @@ exports.login = async (req, res) => {
     }
 
     
-    const isValid = bcrypt.compare(password, teacher.password);
-    if(!isValid){
-        res.status(401)
-        .send({
-            message: "invalid credentials"
+    const isValid = bcrypt.compareSync(password, teacher.password);
+    console.log("isvalid:", isValid)
+    if(isValid){
+        const token = auth.generateJWTToken(teacher);
+        res.status(200)
+        .json({
+            data: token
         })
     }
 
-    const token = auth.generateJWTToken(teacher);
-    res.status(200)
-    .json({
-        data: token
-    })
+    res.status(401)
+    .send({
+        message: "invalid credentials"
+    });
+    
     
 }
