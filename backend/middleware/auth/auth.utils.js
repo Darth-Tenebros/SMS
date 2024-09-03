@@ -96,4 +96,4 @@ const authorizeRolesMiddleware = (roles) => {
     }
 }
 
-module.exports = {login, generateJWTToken, hashPassword}
+module.exports = {login, generateJWTToken, hashPassword, verifyTokenMiddleWare, authorizeRolesMiddleware}

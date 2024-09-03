@@ -3,10 +3,10 @@ const router = express.Router();
 const studentController = require('../controller/student.controller');
 const teacherController = require('../controller/teacher.controller');
 const homeRoomController = require('../controller/homeRoom.controller');
-const {login} = require('../middleware/auth/auth.utils');
+const {login, verifyTokenMiddleWare, authorizeRolesMiddleware} = require('../middleware/auth/auth.utils');
 
 // student
-router.get("/students/", studentController.getAllStudents);
+router.get("/students/", verifyTokenMiddleWare, studentController.getAllStudents);
 
 router.post("/students/", studentController.createStudent);
 
