@@ -106,38 +106,3 @@ exports.deleteTeacherById = (req, res) => {
         })
     });
 }
-
-exports.login = async (req, res) => {
-    const {email, password} = req.body;
-
-    if(!email || ! password){
-        res.status(400).send({
-            message: "you need to provide all details"
-        })
-    }
-
-    let teacher = await repository.getTeacherByEmail(email);
-    teacher = teacher._doc;
-    if(!teacher){
-        res.status(404).send({
-            message: `no teacher with email ${email} has been found`
-        })
-    }
-
-    
-    const isValid = bcrypt.compareSync(password, teacher.password);
-    if(isValid){
-        const token = auth.generateJWTToken(teacher);
-        res.status(200)
-        .json({
-            data: token
-        })
-    }
-
-    res.status(401)
-    .send({
-        message: "invalid credentials"
-    });
-    
-    
-}
