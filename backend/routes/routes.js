@@ -3,7 +3,7 @@ const router = express.Router();
 const studentController = require('../controller/student.controller');
 const teacherController = require('../controller/teacher.controller');
 const homeRoomController = require('../controller/homeRoom.controller');
-const auth = require('../middleware/auth/auth.utils');
+const {login} = require('../middleware/auth/auth.utils');
 
 // student
 router.get("/students/", studentController.getAllStudents);
@@ -23,7 +23,7 @@ router.put("/teachers/:id", teacherController.updateTeacher);
 
 
 // auth
-router.post("/login/", auth.login);
+router.post("/login/", login);
 
 // homeroom
 router.get("/homerooms/", homeRoomController.getAllHomeRooms);

@@ -2,6 +2,9 @@ const bcrypt = require('bcryptjs');
 const jwt = require('jsonwebtoken');
 const teacherRepository = require('../../database/teacher.database');
 
+const SECRET_KEY = 'supersecuresecretkey';
+
+
 const hashPassword = (password) => {
     const salt = bcrypt.genSaltSync();
     const hash = bcrypt.hashSync(password, salt);
@@ -11,7 +14,6 @@ const hashPassword = (password) => {
 
 const generateJWTToken = (user) => {
     // TODO: store in .env
-    const SECRET_KEY = 'supersecuresecretkey';
     return jwt.sign(
         {
             id: user._id,
@@ -60,7 +62,35 @@ const login = async (req, res) => {
     
 }
 
-// console.log(generateJWTToken({_id: "1234", role:"student"}));
-exports.hashPassword = hashPassword;
-exports.generateJWTToken = generateJWTToken;
-exports.login = login;
+const verifyTokenMiddleWare = (req, res, next) => {
+    const token = req.headers['authorization'];
+
+    if(!token){
+        return res.status(403)
+                .send({
+                    message: "no token provided"
+                });
+    }
+
+    jwt.verify(token.split('')[1], SECRET_KEY, (err, decoded) => {
+        if(err){
+            return res.status(401)
+                    .send({
+                        message: "unauthorised"
+                    })
+        }
+
+        req.user = decoded;
+        next();
+    })
+}
+
+const authorizeRolesMiddleware = (roles) => {
+    return (req, res, next) => {
+        if(!roles.includes(req.user.role)){
+            return res.status(40)
+        }
+    }
+}
+
+module.exports = {login, generateJWTToken, hashPassword}
