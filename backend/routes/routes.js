@@ -15,7 +15,7 @@ router.put("/students/:id", studentController.updateStudent);
 router.delete("/students/:id", studentController.deleteStudentById);
 
 // teacher
-router.get("/teachers/", teacherController.getAllTeachers);
+router.get("/teachers/", verifyTokenMiddleWare, teacherController.getAllTeachers);
 
 router.post("/teachers/", teacherController.createTeacher);
 

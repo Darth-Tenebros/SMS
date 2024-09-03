@@ -64,6 +64,7 @@ const login = async (req, res) => {
 
 const verifyTokenMiddleWare = (req, res, next) => {
     const token = req.headers['authorization'];
+    console.log(token);
 
     if(!token){
         return res.status(403)
