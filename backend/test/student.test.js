@@ -3,8 +3,8 @@ const expect = require('chai').expect;
 
 // let response;
 
-describe('test login', () => {
-    it('should return a 401 on /login/ with wrong creds', async () => {
+describe('login', function(){
+    it('should return a 401 on /login/ with wrong creds', async function(){
         const response = await supertest
             .post('/login')
             .send({
@@ -16,10 +16,8 @@ describe('test login', () => {
             })
         expect(response.statusCode).to.be.equal(401);
     });
-});
 
-describe('test login', () => {
-    it('should return a 200 on /login/', async () => {
+    it('should return a 200 on /login/', async function(){
         const response = await supertest
             .post('/login')
             .send({
@@ -33,9 +31,10 @@ describe('test login', () => {
     });
 });
 
-describe('test get students', () => {
-    it('should return a 403 response on GET /students/ with no token provided', async () => {
-            
+
+describe('getAllStudents', function(){
+    
+    it('should return a 403 response on GET /students/ with no token provided', async function(){
         const response = await supertest
             .get('/students/')
             .then(response => {
@@ -44,15 +43,11 @@ describe('test get students', () => {
 
         expect(response.statusCode).to.be.equal(403);
     });
-});
 
-
-describe('test get students', () => {
-    it('should return a 401 response on GET /students/ with invalid token', async () => {
-            
+    it('should return a 401 response on GET /students/ with invalid token', async function(){
         const response = await supertest
             .get('/students/')
-            .set('Authorization', "Bearer "+"randombullshit")
+            .set('Authorization', "Bearer " + "randomtext")
             .then(response => {
                 return response;
             });
@@ -60,13 +55,7 @@ describe('test get students', () => {
         expect(response.statusCode).to.be.equal(401);
     });
 
-
-});
-
-
-describe('test get students', () => {
-    it('should return a 200 response on GET /students/', async () => {
-        // get the token
+    it('should return a 200 response on GET /students/', async function(){
         const token =  await supertest
             .post('/login')
             .send({
@@ -76,7 +65,6 @@ describe('test get students', () => {
             .then(response => {
                 return response
             })
-            
         const response = await supertest
             .get('/students/')
             .set('Authorization', "Bearer "+token._body.data)
@@ -86,6 +74,5 @@ describe('test get students', () => {
 
         expect(response.statusCode).to.be.equal(200);
     });
-
 
 });
