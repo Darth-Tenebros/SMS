@@ -54,7 +54,6 @@ const seed = async () => {
     await model.StudentModel.insertMany(students);
 
 }
-seed();
 
 exports.getAllStudents = () => {
     return model.StudentModel.find({});
