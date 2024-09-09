@@ -99,3 +99,9 @@ exports.deleteStudentById = (id) => {
         {_id: id}
     )
 }
+
+exports.getStudentByEmail = (email) => {
+    return model.StudentModel.findOne(
+        {"contact.email": email}
+    )
+}
