@@ -2,65 +2,56 @@ const model = require('../models/sms.models');
 const hash = require('../middleware/auth/auth.utils')
 
 const seed = async () => {
+    // Define real names for teachers
+    const teacherNames = [
+        'Mr. Jameson', 'Ms. Bennett', 'Mrs. Lee', 'Mr. Patel', 'Ms. Garcia'
+    ];
+
+    // Define real names for students
+    const studentNames = [
+        'Alice Johnson', 'Bob Smith', 'Charlie Brown', 'Diana Prince', 'Edward Wright',
+        'Fiona Davis', 'George Clark', 'Hannah Lewis', 'Ian Walker', 'Julia Harris',
+        'Kevin Robinson', 'Laura Martinez', 'Michael Thompson', 'Nina King', 'Oliver Scott',
+        'Paula Adams', 'Quincy Nelson', 'Rachel King', 'Samuel Evans', 'Tina Young'
+    ];
+
+    // Generate 5 home rooms (classes)
     const homeRooms = await model.HomeRoomModel.insertMany([
-        { name: 'Grade 9A' },
-        { name: 'Grade 10B' },
-        { name: 'Grade 11C' },
-    ]);
-    
-    await model.TeacherModel.insertMany([
-        {
-            name: 'Mr. Smith',
-            password: hash.hashPassword('password'),
-            contact: { email: 'smith@example.com', phone: '555-1234' },
-            homeRoom: homeRooms[0]._id
-        },
-        {
-            name: 'Ms. Johnson',
-            password: hash.hashPassword('password1'),
-            contact: { email: 'johnson@example.com', phone: '555-5678' },
-            homeRoom: homeRooms[1]._id
-        },
-        {
-            name: 'Mrs. Williams',
-            password: hash.hashPassword('password2'),
-            contact: { email: 'williams@example.com', phone: '555-8765' },
-            homeRoom: homeRooms[2]._id
-        },
+        { name: 'Grade 12A' },
+        { name: 'Grade 12B' },
+        { name: 'Grade 12C' },
+        { name: 'Grade 12D' },
+        { name: 'Grade 12E' },
     ]);
 
-    await model.StudentModel.insertMany([
-        {
-            name: 'Alice Brown',
-            password: hash.hashPassword('student'),
-            contact: { email: 'alice.brown@example.com', phone: '555-1111' },
-            subjects: [
-                { name: 'Mathematics', mark: 85 },
-                { name: 'Science', mark: 90 }
-            ],
-            homeRoom: homeRooms[0]._id
-        },
-        {
-            name: 'Bob Green',
-            password: hash.hashPassword('student1'),
-            contact: { email: 'bob.green@example.com', phone: '555-2222' },
-            subjects: [
-                { name: 'English', mark: 75 },
-                { name: 'History', mark: 80 }
-            ],
-            homeRoom: homeRooms[1]._id
-        },
-        {
-            name: 'Charlie Davis',
-            password: hash.hashPassword('student2'),
-            contact: { email: 'charlie.davis@example.com', phone: '555-3333' },
-            subjects: [
-                { name: 'Biology', mark: 88 },
-                { name: 'Chemistry', mark: 92 }
-            ],
-            homeRoom: homeRooms[2]._id
-        },
-    ]);
+    // Generate teachers for each home room
+    const teachers = await model.TeacherModel.insertMany(
+        homeRooms.map((homeRoom, index) => ({
+            name: teacherNames[index],
+            password: hash.hashPassword('password' + index),
+            contact: { email: `teacher${index + 1}@example.com`, phone: `555-1${index + 1}34` },
+            homeRoom: homeRoom._id
+        }))
+    );
+
+    // Generate 20 students for each home room
+    const students = [];
+    for (const homeRoom of homeRooms) {
+        for (let i = 0; i < 20; i++) {
+            students.push({
+                name: studentNames[i],
+                password: hash.hashPassword('student' + (i + 1)),
+                contact: { email: `student${i + 1}@example.com`, phone: `555-1${i + 1}56` },
+                subjects: [
+                    { name: 'Mathematics', mark: Math.floor(Math.random() * 100) },
+                    { name: 'Science', mark: Math.floor(Math.random() * 100) }
+                ],
+                homeRoom: homeRoom._id
+            });
+        }
+    }
+
+    await model.StudentModel.insertMany(students);
 
 }
 seed();
