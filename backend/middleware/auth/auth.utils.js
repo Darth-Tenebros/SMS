@@ -1,6 +1,7 @@
 const bcrypt = require('bcryptjs');
 const jwt = require('jsonwebtoken');
 const teacherRepository = require('../../database/teacher.database');
+const studentRepository = require('../../database/student.database')
 
 const SECRET_KEY = 'supersecuresecretkey';
 
@@ -37,6 +38,9 @@ const login = async (req, res) => {
 
     //TODO: SEARCH TEACHER COLLECTION, IF NOT FOUND, SEARCH STUDENT COLLECTION
     let user = await teacherRepository.getTeacherByEmail(email);
+    if(!user){
+        user = await studentRepository.getStudentByEmail(email);
+    }
     user = user._doc;
     if(!user){
         return res.status(404).send({
@@ -48,9 +52,14 @@ const login = async (req, res) => {
     const isValid = bcrypt.compareSync(password, user.password);
     if(isValid){
         const token = generateJWTToken(user);
+        res.cookie('token', token, {
+            httpOnly: true,
+            sameSite: 'Strict',
+            maxAge: 3600000
+        })
         return res.status(200)
         .json({
-            data: token
+            data: user.role
         })
     }
 
