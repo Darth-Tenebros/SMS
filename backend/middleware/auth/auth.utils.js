@@ -22,7 +22,7 @@ const generateJWTToken = (user) => {
         },
         SECRET_KEY,
         {
-            expiresIn: '1h'
+            expiresIn: '6h'
         }
     );
 }
